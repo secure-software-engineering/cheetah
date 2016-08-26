@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<?eclipse version="3.4"?>
+<plugin>
+
+    <!-- EarlyStartup </-->
+    <extension
+     	point="org.eclipse.ui.startup">
+       	<startup
+        	class="layeredtaintplugin.activators.EarlyStartup">
+       	</startup>
+    </extension>
+    
+    <!-- Overview view </-->
+    <extension point="org.eclipse.ui.views">
+      	<view id="layeredanalysis.views.overview"
+        name="Overview"
+        class="layeredtaintplugin.ui.viewers.OverviewView"
+        icon="icons/icon.png"/>
+	</extension>
+	
+	<!-- Detail view </-->
+    <extension point="org.eclipse.ui.views">
+      	<view id="layeredanalysis.views.detailview"
+        name="Detail"
+        class="layeredtaintplugin.ui.viewers.DetailView"
+        icon="icons/icon.png"/>
+	</extension>
+	
+	<!-- Sink marker </-->
+    <extension
+      	point="org.eclipse.core.resources.markers"
+        id="layeredplugin.markers.leftbar.sink"
+        name="Sink marker">
+      	<super
+          	type="org.eclipse.core.resources.marker">
+      	</super>
+      	<persistent
+            value="false">
+      	</persistent>
+    </extension>
+    <extension
+     	point="org.eclipse.ui.ide.markerImageProviders">
+      	<imageprovider
+        	markertype="layeredplugin.markers.leftbar.sink"
+            icon="icons/sink2.png"
+         	id="layeredplugin.markers.sinkicon">
+      	</imageprovider>
+   	</extension>
+   	 <extension
+      	point="org.eclipse.core.resources.markers"
+        id="layeredplugin.markers.leftbar.sink-gray"
+        name="Sink marker">
+      	<super
+          	type="org.eclipse.core.resources.marker">
+      	</super>
+      	<persistent
+            value="false">
+      	</persistent>
+    </extension>
+    <extension
+     	point="org.eclipse.ui.ide.markerImageProviders">
+      	<imageprovider
+        	markertype="layeredplugin.markers.leftbar.sink-gray"
+            icon="icons/sink-gray2.png"
+         	id="layeredplugin.markers.sinkicon-gray">
+      	</imageprovider>
+   	</extension>
+   	
+   	<!-- Source marker </-->
+    <extension
+      	point="org.eclipse.core.resources.markers"
+        id="layeredplugin.markers.leftbar.source"
+        name="Source marker">
+      	<super
+          	type="org.eclipse.core.resources.marker">
+      	</super>
+      	<persistent
+            value="false">
+      	</persistent>
+    </extension>
+    <extension
+     	point="org.eclipse.ui.ide.markerImageProviders">
+      	<imageprovider
+        	markertype="layeredplugin.markers.leftbar.source"
+            icon="icons/source2.png"
+         	id="layeredplugin.markers.sourceicon">
+      	</imageprovider>
+   	</extension>
+   	 <extension
+      	point="org.eclipse.core.resources.markers"
+        id="layeredplugin.markers.leftbar.source-gray"
+        name="Source marker">
+      	<super
+          	type="org.eclipse.core.resources.marker">
+      	</super>
+      	<persistent
+            value="false">
+      	</persistent>
+    </extension>
+    <extension
+     	point="org.eclipse.ui.ide.markerImageProviders">
+      	<imageprovider
+        	markertype="layeredplugin.markers.leftbar.source-gray"
+            icon="icons/source-gray2.png"
+         	id="layeredplugin.markers.sourceicon-gray">
+      	</imageprovider>
+   	</extension>
+   	
+    <!-- Highlight Markers </-->
+	<extension
+		id="org.eclipse.viatra2.slicemarker"
+	    name="Overview Slice"
+	    point="org.eclipse.core.resources.markers">
+	  	<super
+	    	type="org.eclipse.core.resources.textmarker">
+	  	</super>
+	</extension>
+   	<extension
+        point="org.eclipse.ui.editors.annotationTypes">
+      	<type
+          	markerType="org.eclipse.viatra2.slicemarker"
+           	name="org.eclipse.viatra2.slicemarker">
+    	</type>
+  	</extension>
+   	<extension
+         	point="org.eclipse.ui.editors.markerAnnotationSpecification">
+     	<specification
+            annotationType="org.eclipse.viatra2.slicemarker"
+            colorPreferenceKey="org.eclipse.viatra2.slice.color"
+         	colorPreferenceValue="192,255,192"
+            contributesToHeader="false"
+            highlightPreferenceKey="org.eclipse.viatra2.slice.highlight"
+            highlightPreferenceValue="true"
+            includeOnPreferencePage="true"
+            label="Slice Marker"
+            overviewRulerPreferenceKey="org.eclipse.viatra2.slice.overview"
+            overviewRulerPreferenceValue="true"
+            presentationLayer="0"
+            textPreferenceKey="org.eclipse.viatra2.slice.text"
+            textPreferenceValue="true"
+            textStylePreferenceValue="BOX"
+            verticalRulerPreferenceKey="org.eclipse.viatra2.slice.ruler"
+         	verticalRulerPreferenceValue="true">
+      	</specification>
+   	</extension>
+ 
+    <!-- Builder </-->
+ 
+ 	<extension
+		point="org.eclipse.core.resources.builders"
+		id="layeredplugin.builder.Builder"
+		name="Incremental Builder">
+		<builder hasNature="false">
+			<run class="layeredtaintplugin.activators.builder.Builder">
+				<parameter name="optimize" value="true"/>
+				<parameter name="comment" value="IncrementalBuilder"/>
+			</run>
+		</builder>
+	</extension>
+	<extension point="org.eclipse.ui.menus"> 
+		<menuContribution 
+       		allPopups="false" 
+       		locationURI="popup:org.eclipse.ui.projectConfigure?after=additions">  
+            <dynamic 
+	         	class="layeredtaintplugin.activators.builder.BuildHandler" 
+	            id="layeredtaintplugin.builder.BuildHandler">  
+            </dynamic>
+       	</menuContribution>	
+   	</extension>
+   	<extension
+       	point="org.eclipse.ui.commands"> 
+       	<command
+			defaultHandler="layeredtaintplugin.activators.builder.BuildHandler"
+			id="layeredtaintplugin.builder.BuildHandler"
+			name="buildHandler"
+			returnTypeId="org.eclipse.jdt.ui.commands.javaElementReference">
+		</command>
+ 	</extension>
+</plugin>
