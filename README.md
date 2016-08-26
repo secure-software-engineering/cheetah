@@ -1,11 +1,16 @@
 
-Cheetah
--------------------------------------------------
+Cheetah 
+
+---------------------------------------------------------
+
 A JIT taint analysis for Android applications
+
 Author: Lisa Nguyen Quang Do <lisa.nguyen@iem.fraunhofer.de>
 
-This software is under the EPL license, for more info please visit: https://eclipse.org/legal/eplfaq.php
--------------------------------------------------
+This software is under the EPL licence, for more information, please visit: https://eclipse.org/legal/eplfaq.php
+
+---------------------------------------------------------
+
 To run the analysis:
 
 1. Cheetah is the Plugin project containing the analysis. Run it with the following configurations:
@@ -20,4 +25,5 @@ To run the analysis:
 5. Open the Overview view and the Detail view (Window > Show view)
 
 6. Enjoy.
+
 -------------------------------------------------
