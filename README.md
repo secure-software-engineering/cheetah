@@ -18,7 +18,9 @@ To run the analysis:
 
 2. Once the target Eclipse application is opened, import the demo Android application.
 
-3.  Make sure this Eclipse instance supports Android and that projects are built automatically (Project > Build Automatically) and (Window > Preferences > Android > Build > Uncheck "Skip packaging and dexing...").
+3. Make sure that:
+ - this Eclipse instance supports Android (https://stuff.mit.edu/afs/sipb/project/android/docs/sdk/installing/installing-adt.html),
+ - projects are built automatically (Project > Build Automatically) and (Window > Preferences > Android > Build > Uncheck "Skip packaging and dexing...").
 
 4. Configure the Android project to add the layered builder (Configurations > Add Layered Builder)
 
