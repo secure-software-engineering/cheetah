@@ -3,7 +3,7 @@ Cheetah
 
 ---------------------------------------------------------
 
-A JIT taint analysis for Android applications
+A JIT taint analysis for Android applications - Published at ISSTA 2017
 
 Author: Lisa Nguyen Quang Do <lisa.nguyen@iem.fraunhofer.de>
 
