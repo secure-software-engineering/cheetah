@@ -225,7 +225,8 @@ public class PrepareAnalysis {
 		IClasspathEntry[] resolvedClasspath = javaProject.getResolvedClasspath(true);
 		for (IClasspathEntry classpathEntry : resolvedClasspath) {
 			String path = classpathEntry.getPath().toOSString();
-			if (path.endsWith(".jar")) {
+			File jar = new File(path);
+			if (jar.exists() && path.endsWith(".jar")) {
 				IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(classpathEntry.getPath());
 				if (file != null && file.getRawLocation() != null)
 					path = file.getRawLocation().toOSString();
